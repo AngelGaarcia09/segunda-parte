@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarTroca/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo" name="txtcodigo" class="form-control" value="{{ mistrocas.id_troca }}" readonly>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtanio" name="txtanio" class="form-control" value="{{ mistrocas.año }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtmodelo" name="txtmodelo" class="form-control" value="{{ mistrocas.modelo }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtmarca" name="txtmarca" class="form-control" value="{{ mistrocas.marca }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" step="0.01" id="txtprecio" name="txtprecio" class="form-control" value="{{ mistrocas.precio }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control" value="{{ date }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtllantas" name="txtllantas" class="form-control" value="{{ mistrocas.tipo_llantas }}" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

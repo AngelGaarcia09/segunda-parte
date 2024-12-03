@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Venta</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarVenta/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Código Venta" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtcliente" name="txtcliente" class="form-control" placeholder="ID Cliente" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txttrabajador" name="txttrabajador" class="form-control" placeholder="ID Trabajador" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txttroca" name="txttroca" class="form-control" placeholder="ID Troca" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtcantidad" name="txtcantidad" class="form-control" placeholder="Cantidad" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" step="0.01" id="txttotal" name="txttotal" class="form-control" placeholder="Total Venta" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <img class="w-50" src="{% static 'img/vv.jpg' %}" width="400" height="400" alt="">
+        <h1>Listado de Ventas</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Código Venta</th>
+                        <th>ID Cliente</th>
+                        <th>ID Trabajador</th>
+                        <th>ID Troca</th>
+                        <th>Cantidad</th>
+                        <th>Fecha Venta</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in misventas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ v.id_venta }}</td>
+                        <td>{{ v.id_cliente }}</td>
+                        <td>{{ v.id_trabajador }}</td>
+                        <td>{{ v.id_troca }}</td>
+                        <td>{{ v.cantidad }}</td>
+                        <td>{{ v.fecha_venta }}</td>
+                        <td>{{ v.total }}</td>
+                        <td>
+                            <a href="seleccionarVenta/{{ v.id_venta }}" class="btn btn-info">Editar</a>
+                            <a href="borrarVenta/{{ v.id_venta }}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

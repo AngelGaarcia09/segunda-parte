@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Troca</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarTroca/" method="POST"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="number" id="txtcodigo" name="txtcodigo" class="form-control" placeholder="Código Troca" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="txtanio" name="txtanio" class="form-control" placeholder="Año" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtmodelo" name="txtmodelo" class="form-control" placeholder="Modelo" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtmarca" name="txtmarca" class="form-control" placeholder="Marca" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" step="0.01" id="txtprecio" name="txtprecio" class="form-control" placeholder="Precio" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txttipo" name="txttipo" class="form-control" placeholder="Tipo" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha" name="txtfecha" class="form-control" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtllantas" name="txtllantas" class="form-control" placeholder="Tipo Llantas" required>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <img class="w-50" src="{% static 'img/tro.jpg' %}" width="400" height="400" alt="">
+        <h1>Listado de Trocas</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Código Troca</th>
+                        <th>Año</th>
+                        <th>Modelo</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        <th>Fecha</th>
+                        <th>Tipo Llantas</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for t in mistrocas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ t.id_troca }}</td>
+                        <td>{{ t.año }}</td>
+                        <td>{{ t.modelo }}</td>
+                        <td>{{ t.marca }}</td>
+                        <td>{{ t.precio }}</td>
+                        <td>{{ t.tipo }}</td>
+                        <td>{{ t.date }}</td>
+                        <td>{{ t.tipo_llantas }}</td>
+                        <td>
+                            <a href="seleccionarTroca/{{ t.id_troca }}" class="btn btn-info">Editar</a>
+                            <a href="borrarTroca/{{ t.id_troca }}" class="btn btn-danger">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
